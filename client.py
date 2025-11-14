@@ -1,0 +1,40 @@
+import requests
+import configparser
+
+class Client:
+    def __init__(self, base_url: str = None, api_key: str = None):
+        config = configparser.ConfigParser()
+        config.read('.ini')
+        if api_key is None:
+            api_key = config.get('General','apiKey')
+        if base_url is None:
+            port = config.get('General','port')
+            base_url = f"http://localhost:{port}"
+
+        self.base_url = base_url
+        self.api_key = api_key
+        self.headers = {"x-api-key": self.api_key}
+    
+    def post_game(self, data: object):
+        return self.request("POST", "/api/game", json=data)
+
+    def get_map(self, map_name: str):
+        return self.request("GET", "/api/map", params={"mapName": map_name})
+
+    def request(self, method: str, endpoint: str, **kwargs):
+        url = f"{self.base_url}{endpoint}"
+        try:
+            response = requests.request(method, url, headers=self.headers, verify=False, **kwargs)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error making request to {url}: {e}")
+            if hasattr(e, 'response') and e.response is not None:
+                print(f"Error response status: {e.response.status_code}")
+                print(f"Error response body: {e.response.text}")
+            raise
+
+
+
+
+
