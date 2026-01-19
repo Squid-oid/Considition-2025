@@ -15,6 +15,6 @@ to send to the customer (in a very bad way, which I suspect fails almost all of 
 
 ## Conclusion
 All in all, I finished 24th, which was far from the leaderboard, but seeing as this is my first hackathon I'm happy to have something submitted, and learned a good deal about
-coding under time pressure so I think next time I can do mcuh better! 
+coding under time pressure so I think next time I can do much better! 
 
 Thank you so much to Considition for hosting this event, and to all of the other teams who have chosen to host their code, for providing such a fantastic learning opportunity.
